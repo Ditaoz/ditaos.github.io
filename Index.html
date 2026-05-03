@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Curso Integrado - [Tema do Curso]</title>
+      <link rel="stylesheet" href="style.css">
+      <!-- Font Awesome para ícones de profissionalismo -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+
+      <header class="main-header">
+          <h1>Curso Integrado</h1>
+          <p>Formação em Segurança, Resgate e Prevenção</p>
+      </header>
+
+      <div class="container">
+
+          <!-- Menu de Navegação (Sidebar) -->
+          <aside class="sidebar">
+              <h2>Módulos do Curso</h2>
+              <!-- Os links serão populados via JavaScript ou por estrutura fixa -->
+              <ul id="menu-lista">
+                  <!-- Exemplos de itens de menu -->
+                  <li class="menu-item active" data-module="unidade1">
+                      <i class="fas fa-fire"></i> Unidade 1: Fundamentos de Combate a Incêndio
+                      <span class="submenu-toggle">▼</span>
+                  </li>
+                  <li class="menu-item" data-module="unidade2">
+                      <i class="fas fa-ambulance"></i> Unidade 2: Primeiros Socorros Avançados
+                      <span class="submenu-toggle">►</span>
+                  </li>
+                  <!-- Mais unidades serão adicionadas aqui -->
+              </ul>
+          </aside>
+
+          <!-- Área de Conteúdo Principal -->
+          <main class="content-area">
+              <!-- O conteúdo dinâmico será carregado aqui -->
+              <section id="conteudo-dinamico" class="content-section">
+                  <!-- Conteúdo da Unidade 1 será injetado aqui pelo JS -->
+              </section>
+          </main>
+      </div>
+
+      <script src="script.js"></script>
+  </body>
+  </html>
+
+  Passo 2: Estilização Base (style.css)
+
+  Este CSS inicial foca em criar um layout de duas colunas (Sidebar + Main Content) e garantir que seja responsivo.
+
+  Arquivo Sugerido: style.css
+
+  /* Reset básico e fontes */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f9;
+      color: #333;
+  }
+
+  /* Header */
+  .main-header {
+      background-color: #c0392b; /* Vermelho de segurança */
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-header h1 {
+      margin-bottom: 5px;
+      font-size: 2.2em;
+  }
+  .main-header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+  }
+
+  /* Container principal (Layout de duas colunas) */
+  .container {
+      display: flex;
+      max-width: 1400px;
+      margin: 20px auto;
+      padding: 20px;
+  }
+
+  /* Sidebar */
+  .sidebar {
+      flex: 0 0 280px; /* Largura fixa para o menu */
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      height: fit-content; /* Importante para que não ocupe toda a altura */
+      margin-right: 30px;
+  }
+
+  .sidebar h2 {
+      color: #c0392b;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+  }
+
+  #menu-lista {
+      list-style: none;
+  }
+
+  .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background-color: #ecf0f1;
+      border-left: 5px solid transparent;
+      transition: background-color 0.2s, border-left-color 0.2s;
+  }
+
+  .menu-item:hover {
+      background-color: #d5e0e3;
+  }
+
+  .menu-item.active {
+      background-color: #c0392b;
+      color: white;
+      border-left-color: #e74c3c;
+  }
+
+  .menu-item i {
+      margin-right: 10px;
+  }
+
+  .submenu-toggle {
+      font-size: 0.9em;
+      transition: transform 0.3s;
+  }
+
+  /* Conteúdo Principal */
+  .content-area {
+      flex-grow: 1; /* Ocupa o espaço restante */
+  }
+
+  .content-section {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilização de Conteúdo (Para futuras adições) */
+  .lesson-module {
+      margin-bottom: 40px;
+      padding: 20px;
+      border-left: 4px solid #3498db;
+      background-color: #f9f9f9;
+  }
+
+  .lesson-module h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+  }
+
+  /* Responsividade */
+  @media (max-width: 992px) {
+      .container {
+          flex-direction: column;
+          padding: 15px;
+      }
+      .sidebar {
+          flex: 1 1 auto; /* Permite que o sidebar ocupe a largura total */
+          margin-right: 0;
+          margin-bottom: 20px;
+      }
+      .menu-item {
+          flex-wrap: wrap;
+      }
+  }
+
+  Passo 3: Lógica e Conteúdo Dinâmico (script.js)
+
+  Este é o coração da aplicação. Em vez de escrever conteúdo estático, criaremos uma estrutura de dados (um array de objetos) para os módulos e funções para renderizar o        
+  conteúdo no main enquanto o usuário clica no menu lateral.
+
+  Arquivo Sugerido: script.js
+
+  document.addEventListener('DOMContentLoaded', () => {
+      const menuLista = document.getElementById('menu-lista');
+      const conteudoDinamico = document.getElementById('conteudo-dinamico');
+
+      // ===============================================================
+      // 1. ESTRUTURA DE DADOS DO CURSO (Onde o conteúdo reside)
+      // ===============================================================
+      const cursoConteudo = {
+          'unidade1': {
+              titulo: "Unidade 1: Fundamentos de Combate a Incêndio",
+              descricao: "Entendendo a dinâmica do fogo e os princípios de prevenção.",
+              conteudo: [
+                  { tipo: 'texto', titulo: 'O Ciclo do Fogo', texto: 'O fogo requer três elementos: Combustível, Comburente (Oxigênio) e Calor. Interromper qualquer um destes é 
+  chave na extinção.' },
+                  { tipo: 'imagem', titulo: 'Triângulo do Fogo', url: 'placeholder_triangulo.jpg', texto: 'Visualização dos componentes.' },
+                  { tipo: 'explicacao', titulo: 'Métodos de Combate', texto: 'Existem métodos como resfriamento, sufocamento e abafamento. Cada um se aplica a diferentes        
+  cenários.' }
+              ]
+          },
+          'unidade2': {
+              titulo: 'Primeiros Socorros em Emergências',
+              descricao: 'Protocolos essenciais de atendimento imediato antes da chegada de ajuda profissional.',
+              conteudo: [
+                  { tipo: 'texto', titulo: 'Avaliação de Cena', texto: 'A primeira ação é garantir a segurança do socorrista e das vítimas. Nunca se coloque em risco.' },       
+                  { tipo: 'checklist', titulo: 'Passos Iniciais', checklist: ['Verificar respiração', 'Controlar hemorragias', 'Acionar ajuda médica'] }
+              ]
+          }
+      };
+
+      // --- FUNÇÕES DE RENDERIZAÇÃO ---
+
+      /**
+       * Renderiza o conteúdo HTML com base no tipo de conteúdo fornecido.
+       * @param {object} item - O objeto de conteúdo.
+       * @returns {string} O HTML formatado.
+       */
+      const renderItemContent = (item) => {
+          let html = `<section class="content-item">`;
+          html += `<h3>${item.titulo}</h3>`;
+
+          switch (item.tipo) {
+              case 'texto':
+                  html += `<p>${item.texto}</p>`;
+                  break;
+              case 'imagem':
+                  html += `<img src="${item.url}" alt="${item.titulo}" style="width:100%; max-height: 300px; object-fit: cover;">`;
+                  html += `<p class="caption"><em>${item.texto}</em></p>`;
+                  break;
+              case 'explicacao':
+                  html += `<div class="box explanation-box"><strong>Pontos Chave:</strong> ${item.texto}`;
+                  html += '</div>';
+                  break;
+              case 'checklist':
+                  html += '<ul class="checklist-list">';
+                  item.checklist.forEach(itemText => {
+                      html += `<li>✔ ${itemText}</li>`;
+                  });
+                  html += '</ul>';
+                  break;
+          }
+          html += `</section>`;
+          return html;
+      };
+
+
+      /**
+       * Carrega e exibe o conteúdo de uma unidade específica.
+       * @param {string} key - A chave da unidade no objeto curso.
+       * @param {string} title - Título a ser usado no cabeçalho.
+       * @param {string} description - Descrição da unidade.
+       */
+      const loadUnitContent = (key, title, description) => {
+          const unitData = curso[key];
+          if (!unitData) return;
+
+          // 1. Atualiza o cabeçalho principal
+          document.getElementById('unit-title').textContent = title;
+          document.getElementById('unit-description').textContent = description;
+
+          // 2. Limpa e renderiza o conteúdo
+          const contentContainer = document.getElementById('content-body');
+          contentContainer.innerHTML = ''; // Limpa o conteúdo anterior
+
+          let contentHTML = unitData.conteudo.map(renderItemContent).join('');
+          contentContainer.innerHTML = contentHTML;
+
+          // Atualiza o URL para histórico (ótimo para navegação)
+          history.pushState({ unitKey: key }, title, `#${key}`);
+      };
+
+
+      // --- MANIPULADOR DE EVENTOS Y ROUTING ---
+
+      /**
+       * Maneja a mudança de URL (navegação por back/forward o por clique)
+       */
+      const handleRouteChange = () => {
+          const hash = window.location.hash.substring(1);
+          if (hash && curso[hash]) {
+              const unitKey = hash;
+              const unitTitle = curso[unitKey].titulo || 'Conteúdo Programado';
+              const unitDescription = curso[unitKey].descricao || 'Detalhes sobre esta seção.';
+              loadUnitContent(unitKey, unitTitle, unitDescription);
+          } else if (curso['unidade1']) {
+              // Default na primeira carga
+               loadUnitContent('unidade1', curso['unidade1'].titulo, curso['unidade1'].descricao);
+          }
+      };
+
+      // 1. Event Listener para navegação por hash
+      window.addEventListener('hashchange', handleRouteChange);
+
+      // 2. Inicialização
+      document.addEventListener('DOMContentLoaded', () => {
+          // Configura o evento de clique nos botões de "Próximo/Anterior"
+          document.getElementById('nav-button-prev').addEventListener('click', () => {
+              const currentHash = window.location.hash.substring(1);
+              let previousKey = null;
+
+              // Lógica simples: encontra a chave anterior na ordem definida
+              if (currentHash === 'unidade2') {
+                  previousKey = 'unidade1';
+              } else if (currentHash === 'unidade1') {
+                  // Volta para o default se não houver mais unidades
+                  previousKey = null;
+              }
+
+              if (previousKey) {
+                  window.location.hash = `#${previousKey}`;
+              }
+          });
+
+          document.getElementById('nav-button-next').addEventListener('click', () => {
+              const currentHash = window.location.hash.substring(1);
+              let nextKey = null;
+
+              // Lógica simples: encontra a chave seguinte na ordem definida
+              if (currentHash === 'unidade1') {
+                  nextKey = 'unidade2';
+              } else if (currentHash === 'unidade2') {
+                  // Não avança mais
+                  nextKey = null;
+              }
+
+              if (nextKey) {
+                  window.location.hash = `#${nextKey}`;
+              }
+          });
+
+          // Inicializa o carregamento de conteúdo baseado na URL
+          handleRouteChange();
+      });
+
+      // Assegura que o objeto 'curso' esteja acessível globalmente ou passado como parâmetro
+      const curso = {
+          'unidade1': {
+              titulo: "Principios Básicos de Segurança",
+              descricao: "Este módulo introduz os conceitos fundamentais de prevenção de acidentes e incêndios.",
+              conteudo: [
+                  { tipo: 'texto', titulo: 'O Ciclo do Fogo', texto: 'O fogo requer três elementos: Combustível, Comburente (Oxigênio) e Calor. Interromper qualquer um destes é 
+  chave na extinção.' },
+                  { tipo: 'imagem', titulo: 'Triângulo do Fogo', url: 'https://via.placeholder.com/800x300?text=Triangulo+do+Fogo', texto: 'Visualização dos componentes:        
+  Triângulo formado por Combustível, Oxigênio e Calor.' },
+                  { tipo: 'explicacao', titulo: 'Métodos de Combate', texto: 'Existem métodos como resfriamento, sufocamento e abafamento. Cada um se aplica a diferentes        
+  cenários.' }
+              ]
+          },
+          'unidade2': {
+              titulo: "Primeiros Socorros em Emergências",
+              descricao: "Reconhecimento e intervenção imediata em situações de risco de vida.",
+              conteudo: [
+                  { tipo: 'texto', titulo: 'Avaliação de Cena', texto: 'A primeira ação é garantir a segurança do socorrista e das vítimas. Nunca se coloque em risco.' },       
+                  { tipo: 'checklist', titulo: 'Passos Iniciais', checklist: ['Verificar respiração', 'Controlar hemorragias', 'Acionar ajuda médica'] }
+              ]
+          }
+      };
+  </script>
+
+  <!-- Estrutura HTML -->
+  <div id="app-container">
+
+      <!-- Painel de Navegação e Informações da Unidade -->
+      <header class="unit-header">
+          <h1 id="unit-title">Carregando Unidade...</h1>
+          <p id="unit-description">Por favor, aguarde mientras se carga el contenido o navegue usando los botones.</p>
+      </header>
+
+      <div class="content-area">
+
+          <!-- Navegación: Botones Anterior/Siguiente -->
+          <div class="navigation-controls">
+              <button id="nav-button-prev" class="nav-button" disabled>← Anterior</button>
+              <button id="nav-button-next" class="nav-button" disabled>Siguiente →</button>
+          </div>
+
+          <!-- Contenedor Principal de Contenido -->
+          <div id="content-body" class="content-body">
+              <!-- El contenido generado dinámicamente va aquí -->
+          </div>
+      </div>
+      <div class="footer">
+          <p>Sistema de Capacitación en Seguridad - © 2024</p>
+      </div>
+  </div>
+
+  <!-- Estilos CSS para darle un aspecto profesional -->
+  <style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin: 0;
+          background-color: #f4f7f9;
+          color: #333;
+      }
+      .container {
+          max-width: 1000px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+          background-color: #0056b3;
+          color: white;
+          padding: 20px;
+          text-align: center;
+      }
+      .content-body {
+          padding: 30px;
+          border-bottom: 1px solid #eee;
+      }
+      /* Estilos específicos para el contenido generado */
+      .content-section {
+          margin-bottom: 30px;
+          padding-bottom: 20px;
+          border-bottom: 1px dashed #ccc;
+      }
+      .content-section h2 {
+          color: #0056b3;
+          border-bottom: 2px solid #0056b3;
+          padding-bottom: 10px;
+      }
+      /* Estilos de contenido específico */
+      .content-section p {
+          line-height: 1.6;
+          margin-bottom: 15px;
+      }
+      .highlight {
+          background-color: #fff3cd;
+          border-left: 4px solid #ffc107;
+          padding: 10px;
+          margin: 15px 0;
+      }
+      .highlight strong {
+          color: #856404;
+      }
+
+      /* Estilos del pie de página y navegación */
+      .footer {
+          background-color: #333;
+          color: white;
+          text-align: center;
+          padding: 15px;
+          font-size: 0.9em;
+      }
+      .footer p {
+          margin: 0;
+      }
+
+      /* Ajustes de la estructura principal */
+      .header {
+          padding: 20px;
+          text-align: center;
+      }
+      .content-body {
+          padding: 30px;
+      }
+
+      /* Navegación de navegación (para hacerlo más usable) */
+      .navigation-bar {
+          display: flex;
+          gap: 20px;
+          padding: 20px;
+          background-color: #e9ecef;
+          justify-content: center;
+      }
+      .nav-button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          background-color: #007bff;
+          color: white;
+      }
+      .nav-button:hover {
+          background-color: #0056b3;
+      }
+
+  </style>
+  <script>
+      // 1. Base de datos simulada de cursos/módulos
+      const courseData = {
+          'inicio': {
+              title: "Bienvenida al Curso de Seguridad Industrial",
+              content: `
+                  <p>Bienvenidos a esta capacitación esencial. El objetivo principal de este módulo es dotar a los participantes de conocimientos fundamentales sobre riesgos y  
+  prevención.</p>
+                  <div class="highlight">
+                      <strong>⚠️ ATENCIÓN:</strong> La seguridad no es una opción, es una responsabilidad compartida. Por favor, mantenga la atención en los siguientes temas.   
+                  </div>
+                  <div class="content-section">
+                      <h2>Objetivos del Módulo</h2>
+                      <p>Aprenderemos a identificar peligros, conocer la normativa aplicable y entender la cadena de prevención.</p>
+                  </div>
+              `
+          },
+          'inicio': {
+              title: "Módulo 1: Identificación de Peligros",
+              content: `
+                  <div class="content-section">
+                      <h2>1. ¿Qué es un Peligro?</h2>
+                      <p>Un peligro es cualquier fuente, fuente o situación con potencial para causar daño.</p>
+                      <p><strong>Ejemplos Comunes:</strong> Resbalones, caídas, contacto eléctrico, sustancias químicas.</p>
+                      <p><strong>Diferencia clave:</strong> Peligro (Potencial) vs Riesgo (Probabilidad de ocurrencia de daño).</p>
+                      <div class="highlight">
+                          <strong>💡 Dato Curioso:</strong> La prevención activa es siempre más efectiva que la reacción.
+                      </div>
+                  </div>
+              `
+          },
+          'modulo_1': {
+              title: "Módulo 1: Identificación de Peligros",
+              content: `
+                  <div class="content-section">
+                      <h2>1. ¿Qué es un Peligro?</h2>
+                      <p>Un peligro es cualquier fuente, fuente o situación con potencial para causar daño.</p>
+                      <p><strong>Ejemplos Comunes:</strong> Resbalones, caídas, contacto eléctrico, sustancias químicas.</p>
+                      <p><strong>Diferencia clave:</strong> Peligro (Potencial) vs Riesgo (Probabilidad de ocurrencia de daño).</p>
+                      <div class="highlight">
+                          <strong>💡 Dato Curioso:</strong> La prevención activa es siempre más efectiva que la reacción.
+                      </div>
+                  </div>
+              `
+          },
+          'modulo_1': {
+              title: "Módulo 1: Identificación de Peligros",
+              content: `
+                  <div class="content-section">
+                      <h2>2. Evaluación de Riesgos</h2>
+                      <p>La evaluación de riesgos sigue un proceso estructurado: Identificar -> Analizar -> Valorar.</p>
+                      <p>Se recomienda usar la Matriz de Riesgos (Probabilidad x Severidad).</p>
+                      <div class="highlight">
+                          <strong>✅ Acción Requerida:</strong> Complete la matriz de riesgos y determine las acciones correctivas necesarias.
+                      </div>
+                  </div>
+              `
+          },
+          'modulo_1': {
+              title: "Módulo 1: Identificación de Peligros",
+              content: `
+                  <div class="content-section">
+                      <h2>3. Controles Jerárquicos de Riesgos</h2>
+                      <p>Es fundamental aplicar la jerarquía: 1. Eliminación, 2. Sustitución, 3. Controles de Ingeniería, 4. Controles Administrativos, 5. EPP (Equipo de        
+  Protección Personal).</p>
+                      <p>La prioridad debe ser siempre la Eliminación.</p>
+                  </div>
+              `
+          },
+          'modulo_1_final': {
+              title: "Módulo 1: Repaso y Evaluación",
+              content: `
+                  <div class="content-section">
+                      <h2>Repaso de Controles Jerárquicos</h2>
+                      <p>Recuerde: El mejor control siempre es la Eliminación.</p>
+                      <p><strong>Autoevaluación:</strong> ¿Qué acción tomaría ante un cable suelto?</p>
+                      <div class="highlight">
+                          <strong>✍️ Tarea:</strong> Analice los tres puntos más críticos de la obra y proponga un plan de mitigación.
+                      </div>
+                  </div>
+              `
+          },
+          'modulo_2': {
+              title: "Módulo 2: Procedimientos Seguros",
+              content: `
+                  <div class="content-section">
+                      <h2>1. Bloqueo y Etiquetado (LOTO)</h2>
+                      <p>Es vital desenergizar equipos antes de cualquier intervención. Utilice el protocolo LOTO.</p>
+                      <p><strong>Pasos clave:</strong> Notificar, Desconectar, Bloquear, Etiquetar.</p>
+                  </div>
+              `
+          },
+          'modulo_2': {
+              title: "Módulo 2: Procedimientos Seguros",
+              content: `
+                  <div class="content-section">
+                      <h2>2. Trabajo en Altura</h2>
+                      <p>Siempre utilice arnés, línea de vida y puntos de anclaje certificados.</p>
+                      <div class="highlight">
+                          <strong>🚨 Regla de Oro:</strong> Nunca trabaje en altura sin el equipo adecuado y la supervisión.
+                      </div>
+                  </div>
+              `
+          },
+          'modulo_2_final': {
+              title: "Módulo 2: Repaso y Evaluación",
+              content: `
+                  <div class="content-section">
+                      <h2>Práctica de Caso</h2>
+                      <p>Describa el procedimiento seguro para ingresar a un espacio confinado.</p>
+                      <p>Revisar los puntos críticos y aplicar los procedimientos aprendidos en caso práctico.</p>
+                  </div>
+              `
+          }
+      };
+
+      // Inicialización de la navegación y contenido
+      let currentModule = 'inicio';
+      const navButtons = document.querySelectorAll('.nav-button');
+
+      function loadModule(moduleName) {
+          // 1. Actualizar el contenido principal
+          const contentArea = document.getElementById('content-area');
+          const moduleContent = document.getElementById('module-content');
+
+          let html = '';
+
+          if (moduleName === 'inicio') {
+              html = `
+                  <h1>Bienvenido al Curso de Seguridad Industrial</h1>
+                  <p class="intro-text">Este módulo cubre los fundamentos esenciales para prevenir accidentes y mantener un entorno de trabajo seguro.</p>
+                  <p>Aprenderemos sobre riesgos, procedimientos operativos seguros y el uso adecuado de EPP.</p>
+                  <h3>Navega por los módulos:</h3>
+                  <div class="module-list">
+                      <button class="nav-button" onclick="loadModule('inicio_modulos')">Ir a Módulos</button>
+                  </div>
+              `;
+          } else if (moduleName === 'inicio_modulos') {
+              html = `
+                  <h1>Mapa de Contenidos</h1>
+                  <p>Selecciona un módulo para comenzar tu aprendizaje.</p>
+                  <div class="module-list">
+                      <button class="nav-button" onclick="loadModule('inicio')">Inicio General</button>
+                      <button class="nav-button" onclick="loadModule('inicio_modulos')">Descripción General</button>
+                      <button class="nav-button" onclick="loadModule('modulo1')">Módulo 1: Fundamentos de Riesgos</button>
+                      <button class="nav-button" onclick="loadModule('modulo2')">Módulo 2: Procedimientos Seguros</button>
+                      <button class="nav-button" onclick="loadModule('inicio_modulos_menu')">Módulos Disponibles</button>
+                  </div>
+              `;
+          } else if (moduleName === 'modulo1') {
+              html = `
+                  <h1>Módulo 1: Fundamentos de Riesgos</h1>
+                  <p>Comprender la naturaleza de los peligros y cómo clasificarlos es el primer paso hacia la prevención.</p>
+                  <h3>Temas Clave:</h3>
+                  <ul>
+                      <li>Identificación de Peligros: ¿Qué es y cómo detectarlo?</li>
+                      <li>Clasificación de Riesgos: Físicos, Químicos, Biológicos.</li>
+                      <li>Accidentes y Lesiones: Causas raíz y prevención.</li>
+                  </ul>
+                  <button class="nav-button" onclick="loadModule('modulo1_detalles')">Ver Detalle</button>
+              `;
+          } else if (moduleName === 'modulo1_detalles') {
+              const moduleData = {
+                  title: "Identificación de Riesgos",
+                  content: `
+                      <p>La identificación de riesgos es un proceso continuo que requiere observación atenta del entorno laboral.</p>
+                      <h4>Pasos para la Identificación:</h4>
+                      <ol>
+                          <li>Inspección Visual: Recorrido sistemático del área.</li>
+                          <li>Investigación Documental: Revisión de hojas de seguridad (SDS).</li>
+                          <li>Consulta con Expertos: Interacción con operarios experimentados.</li>
+                      </ol>
+                      <p>Recuerde siempre aplicar la metodología de análisis de tareas (JSA) antes de iniciar cualquier proceso nuevo.</p>
+                      <h3>Conceptos Adicionales:</h3>
+                      <ul>
+                          <li>Accidente vs. Incidente: Entender la diferencia para mejorar la respuesta.</li>
+                          <li>Límites de Exposición: Conocer los límites máximos permitidos.</li>
+                      </ul>
+                  `
+              }
+              html = `
+                  <h1>${moduleData.title}</h1>
+                  ${moduleData.content}
+                  <button class="nav-button" onclick="loadModule('modulo1_detalles')">Volver al Detalle de Riesgos</button>
+              `;
+          } else if (moduleName === 'modulo2') {
+              html = `
+                  <h1>Módulo 2: Procedimientos Operativos Seguros (POS)</h1>
+                  <p>Los POS establecen el paso a paso que debe seguirse para realizar tareas de alto riesgo, minimizando la variabilidad humana.</p>
+                  <h3>Temas Clave:</h3>
+                  <ul>
+                      <li>Permisos de Trabajo: Gestión de entradas y permisos requeridos.</li>
+                      <li>Aislamiento de Energía (LOTO): Desconexión de fuentes energéticas.</li>
+                      <li>Trabajo en Altura y Espacios Confinados.</li>
+                  </ul>
+                  <button class="nav-button" onclick="loadModule('modulo2_detalles')">Ver Detalle</button>
+              `;
+          } else if (moduleName === 'modulo2_detalles') {
+              const moduleData = {
+                  title: "Gestión de Permisos de Trabajo",
+                  content: `
+                      <p>Todo trabajo que implique riesgo debe estar formalmente autorizado mediante un Permiso de Trabajo (PT). Este documento es el responsable legal de la    
+  seguridad del equipo.</p>
+                      <h4>Componentes del PT:</h4>
+                      <ul>
+                          <li>Alcance: ¿Qué se va a hacer?</li>
+                          <li>Riesgos Identificados: ¿Qué peligros existen en el área?</li>
+                          <li>Medidas de Control: ¿Qué se debe hacer para mitigar esos riesgos?</li>
+                      </ul>
+                      <p>Nunca inicie un trabajo sin un Permiso de Trabajo vigente y firmado por las autoridades competentes.</p>
+                      <h3>Ejemplo Práctico:</h3>
+                      <p>Si se requiere soldar, el PT debe incluir: Aislamiento del área, uso de EPP específico, y supervisión constante.</p>
+                  `
+              }
+              html = `
+                  <h1>${moduleData.title}</h1>
+                  ${moduleData.content}
+                  <button class="nav-button" onclick="loadModule('modulo2_detalles')">Volver a POS</button>
+              `;
+          } else if (moduleName === 'inicio_modulos_menu') {
+               html = `
+                  <h1>Módulos Disponibles</h1>
+                  <div class="module-list">
+                      <button class="nav-button" onclick="loadModule('modulo1')">Módulo 1: Fundamentos de Riesgos</button>
+                      <button class="nav-button" onclick="loadModule('modulo2')">Módulo 2: Procedimientos Seguros</button>
+                  </div>
+              `;
+          }
+
+
+          // 2. Renderizar el HTML en la página
+          contentArea.innerHTML = html;
+
+          // 3. Actualizar el estado de la navegación (si es necesario)
+          console.log(`Módulo cargado: ${moduleName}`);
+      }
+
+      // Asignar el evento al cargar la página
+      window.onload = function() {
+          loadModule('inicio');
+      };
+
+  </script>
